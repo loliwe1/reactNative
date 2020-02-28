@@ -1,35 +1,26 @@
-import React from 'react'
-import {Text, View, StyleSheet, Button} from 'react-native'
+import React from 'react';
+import { View, Image, Text } from 'react-native';
+import CheckBox from 'react-native-check-box';
+import styles from './TaskStyle';
 
-const styles = StyleSheet.create({
-    Task: {
-      justifyContent: 'center',
-      alignItems: 'flex-start',
-      width: 345,
-      height: 59,
-      paddingLeft: 15,
-      marginTop: 10,
-      backgroundColor: 'white',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: '#E5E5E5',
-      borderRadius: 4,
-    },
-    TaskText: {
-    //   fontFamily: 'SF UI Text',
-      fontSize: 17,
-      lineHeight: 20,
-      color: '#514D47',
-    }
+const Task = ({ title, onClick, isChecked }) => {
+  return (
+    <View style={styles.taskWrap}>
+      <View style={styles.taskLine} />
+      <CheckBox isChecked={isChecked} onClick={onClick} />
+      {isChecked
+        ? <Text style={styles.isChecked}>{title}</Text>
+        : <Text style={styles.taskText}>{title}</Text> }
+      <View style={styles.prayers}>
+        <Image source={require('../../images/user.png')} />
+        <Text style={styles.prayersText}>0</Text>
+      </View>
+      <View style={styles.prayers}>
+        <Image source={require('../../images/prayer.png')} />
+        <Text style={styles.prayersText}>0</Text>
+      </View>
+    </View>
+  );
+};
 
-})
-
-const Task = ({ title }) => {
-    return (
-        <View style={styles.Task}>
-            <Text style={styles.TaskText}>{title}</Text>
-        </View>
-    )
-}
-
-export default Task
+export default Task;

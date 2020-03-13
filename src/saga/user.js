@@ -31,9 +31,7 @@ export function* handleLogInTrigger(action) {
 export function* handlePersisSignInTrigger(action) {
   const { navigation } = action.payload;
   try {
-    console.log(1);
     const token = yield call(AsyncStorageService.getToken);
-    console.log(token);
     if (!token) throw new Error('No token found.');
     const users = yield call(AsyncStorageService.getUser);
     const response = yield call(ApiService.persisSignIn, token);
@@ -43,7 +41,6 @@ export function* handlePersisSignInTrigger(action) {
     }
     yield put(logInTrigger.success(activeUser));
   } catch (e) {
-    // navigation.navigate('LogIn');
     yield put(persisSignIn.failure(e));
   }
 }

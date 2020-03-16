@@ -3,26 +3,38 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import TaskScreen from './TaskScreen';
-import {addComment, getComments} from '../../store/routines/routines';
+import { addComment, getComments } from '../../store/routines/routines';
 
 class TaskScreenContainer extends React.Component {
   componentDidMount() {
-    const {getComments} = this.props;
+    const { getComments } = this.props;
     getComments();
   }
 
-  addComment = ({comment}) => {
-      const {cardId} = this.props.route.params;
-      const {addComment, id, creator } = this.props;
-      const date = new Date().toISOString()
-      addComment({comment, id, cardId, creator, date});
+  addComment = ({ comment }) => {
+    const {
+      addComment,
+      id,
+      creator,
+      route,
+    } = this.props;
+    const { cardId } = route.params;
+    const date = new Date().toISOString();
+    addComment({
+      comment,
+      id,
+      cardId,
+      creator,
+      date,
+    });
   }
 
   render() {
-    const {cardId} = this.props.route.params;
-    const comments = this.props.comments.filter((comment) => comment.cardId === cardId);
+    const { route, comments } = this.props;
+    const { cardId } = route.params;
+    const comment = comments.filter((c) => c.cardId === cardId);
     return (
-      <TaskScreen addComment={this.addComment} comments={comments} />
+      <TaskScreen addComment={this.addComment} comments={comment} />
     );
   }
 }
@@ -44,13 +56,17 @@ TaskScreenContainer.propTypes = {
   creator: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   addComment: PropTypes.func.isRequired,
-  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
+  getComments: PropTypes.func.isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({
       cardId: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-    })
-  })
+    }),
+  }),
+};
+
+TaskScreenContainer.defaultProps = {
+  route: {},
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskScreenContainer);

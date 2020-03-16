@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     lineHeight: 37,
   },
 
-  detailItemSubTitle:{
+  detailItemSubTitle: {
     fontSize: 13,
     lineHeight: 15,
     color: '#514D47',

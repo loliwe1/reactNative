@@ -4,8 +4,8 @@
         "es6": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "plugin:react/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -19,14 +19,16 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-native"
     ],
     "rules": {
-        "import/no-named-as-default": 0,
-        "arrow-body-style": 0,
-        "jsx-a11y/click-events-have-key-events": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "no-shadow": 0,
-        "jsx-a11y/no-noninteractive-element-interactions": 0,
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
-    }
+        "react/display-name": 0,
+        "global-require": 0,
+        "no-plusplus": 0, 
+        "react/jsx-props-no-spreading": 0
+    },
+    "parser": "babel-eslint"
 }

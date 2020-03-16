@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import ColumnScreen from './ColumnScreen';
-import {getTasks , addTask} from '../../store/routines/routines'
+import { getTasks, addTask } from '../../store/routines/routines';
 
 class ColumnScreenContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {show: true}
+    this.state = { show: true };
   }
 
   componentDidMount() {
@@ -16,54 +16,59 @@ class ColumnScreenContainer extends React.Component {
     getTasks();
   }
 
-  addTask = ({prayer}) => {
-      const {columnId} = this.props.route.params;
-      const {addTask, columns} = this.props
-      const column = columns.find((column) => column.id === columnId)
-      const title = prayer
-      const description = ''
-      const checked = false
-      addTask({title, description, checked, column})
+  addTask = ({ prayer }) => {
+    const { addTask, columns, route } = this.props;
+    const { columnId } = route.params;
+    const column = columns.find((c) => c.id === columnId);
+    const title = prayer;
+    const description = '';
+    const checked = false;
+    addTask({
+      title,
+      description,
+      checked,
+      column,
+    });
   }
 
   showAnswered = () => {
-    this.setState({show: !this.state.show})
+    this.setState((prevState) => ({ show: !prevState.show }));
   }
-  
+
   render() {
-    const {show} = this.state;
-    const {columnId} = this.props.route.params;
-    const {navigation} = this.props;
-    const tasks = this.props.tasks.filter((task) => task.columnId === columnId)
-    const tasksAnswered = tasks.filter(task => task.checked === true)
-    const tasksNotAnswered = tasks.filter(task => task.checked === false) 
+    const { show } = this.state;
+    const { navigation, route, tasks } = this.props;
+    const { columnId } = route.params;
+    const task = tasks.filter((t) => t.columnId === columnId);
+    const tasksAnswered = task.filter((t) => t.checked === true);
+    const tasksNotAnswered = task.filter((t) => t.checked === false);
     return (
-      <ColumnScreen 
+      <ColumnScreen
         addTask={this.addTask}
         tasksNotAnswered={tasksNotAnswered}
         tasksAnswered={tasksAnswered}
         navigation={navigation}
         show={show}
         showAnswered={this.showAnswered}
-        
-        />
+      />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-    tasks: state.task,
-    columns: state.column,
-})
+  tasks: state.task,
+  columns: state.column,
+});
 
 const mapDispatchToProps =(dispatch) => bindActionCreators({
-    addTask,
-    getTasks,
-}, dispatch)
+  addTask,
+  getTasks,
+}, dispatch);
 
 ColumnScreenContainer.propTypes = {
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
   tasks: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   addTask: PropTypes.func.isRequired,
   getTasks: PropTypes.func.isRequired,
   route: PropTypes.shape({
@@ -72,7 +77,10 @@ ColumnScreenContainer.propTypes = {
       title: PropTypes.string.isRequired,
     }),
   }),
-  
+};
+
+ColumnScreenContainer.defaultProps = {
+  route: {},
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColumnScreenContainer);

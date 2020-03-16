@@ -1,21 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import SignUpScreen from './SignUpScreen';
-import {signUpTriggerPromiseCreator} from '../../store/routines/routines';
 import { bindPromiseCreators } from 'redux-saga-routines';
+import SignUpScreen from './SignUpScreen';
+import { signUpTriggerPromiseCreator } from '../../store/routines/routines';
+
 
 class SignUpScreenContainer extends React.Component {
-
   signUpTrigger = async (v) => {
-    const {signUpTriggerPromiseCreator, navigation} = this.props;
+    const { signUpTriggerPromiseCreator, navigation } = this.props;
 
-    try{
+    try {
       await signUpTriggerPromiseCreator(v)
-        .then(() => navigation.navigate('My Desc'))
-    }catch(e) {
-      console.log(e)
+        .then(() => navigation.navigate('My Desc'));
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -26,14 +25,13 @@ class SignUpScreenContainer extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindPromiseCreators({
+const mapDispatchToProps = (dispatch) => bindPromiseCreators({
   signUpTriggerPromiseCreator,
-}, dispatch)
+}, dispatch);
 
 SignUpScreenContainer.propTypes = {
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
-  signUpTrigger: PropTypes.func.isRequired,
-  
+  signUpTriggerPromiseCreator: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(SignUpScreenContainer);

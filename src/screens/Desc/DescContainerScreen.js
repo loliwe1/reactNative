@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // import { bindActionCreators } from 'redux';
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { connect } from 'react-redux';
@@ -6,9 +7,10 @@ import Desc from './DescScreen';
 import { getColumnsPromiseCreator } from '../../store/routines/routines';
 
 class DescContainerScreen extends React.Component {
-  state = {
-    loadColumns: true,
-  };
+  constructor(props) {
+    super(props);
+    this.state = { loadColumns: true };
+  }
 
   async componentDidMount() {
     const { getColumnsPromiseCreator } = this.props;
@@ -31,9 +33,16 @@ class DescContainerScreen extends React.Component {
   }
 }
 
+DescContainerScreen.propTypes = {
+  getColumnsPromiseCreator: PropTypes.func.isRequired,
+  column: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
 const mapStateToProps = (state) => ({
   column: state.column,
   user: state.user,
+
 });
 
 const mapDispatchToProps = (dispatch) => bindPromiseCreators({

@@ -13,12 +13,14 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
 
   },
+
   taskCheckBox: {
     backgroundColor: '#fff',
     color: '#514D47',
     width: 24,
     height: 24,
   },
+
   taskLine: {
     borderLeftWidth: 3,
     borderLeftColor: '#AC5253',
@@ -54,6 +56,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
 
   },
+
   deleteTask: {
     width: 80,
     height: 66,

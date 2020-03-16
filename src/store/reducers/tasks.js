@@ -16,8 +16,9 @@ const task = (state = initialState, action) => {
     case addTask.FAILURE: return action.payload;
     case deleteTask.SUCCESS: return [...state.filter((task) => task.id !== action.payload)];
     case deleteTask.FAILURE: return action.payload;
-    case checkTask.SUCCESS:
-      return state.map((task) => task.id === action.payload.id ? {...task, checked: !task.checked} : task);
+    case checkTask.SUCCESS: return state.map((task) => (task.id === action.payload.id
+      ? { ...task, checked: !task.checked }
+      : task));
     case checkTask.FAILURE: return action.payload;
     default: return state;
   }

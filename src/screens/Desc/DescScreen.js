@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ColumnContainer from '../../components/Column/ColumnContainer';
-import styles from './DescStyles';
+import styles from './style';
 
 const Desc = ({ column, navigation, loadColumns }) => (
   <View style={styles.Desc}>

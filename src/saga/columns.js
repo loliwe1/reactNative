@@ -45,13 +45,12 @@ export function* handleDeleteColumnsTrigger(action) {
 }
 
 export function* handleChangeColumnTitleTrigger(action) {
-
   const { payload } = action;
   const { title, columnId } = payload;
 
   try {
     yield call(ApiService.changeTitleColumn, payload);
-    yield put(changeColumnTitle.success({title, columnId}));
+    yield put(changeColumnTitle.success({ title, columnId }));
   } catch (e) {
     yield put(changeColumnTitle.failure(e.message));
   }

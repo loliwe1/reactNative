@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   formWrap: {
     height: '100%',
     backgroundColor: '#fff',
+    justifyContent: 'center',
   },
 
   formItem: {

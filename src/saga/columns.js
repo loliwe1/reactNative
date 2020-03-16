@@ -14,13 +14,11 @@ import {
 export function* handleGetColumnsTrigger() {
   try {
     yield put(getColumns.request());
-
     const response = yield call(ApiService.getColumns);
     const columns = response.data;
     yield put(getColumns.success(columns));
   } catch (e) {
     yield put(getColumns.failure(e.message));
-
     yield put(getColumns.fulfill());
   }
 }

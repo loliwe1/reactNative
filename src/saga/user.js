@@ -5,10 +5,12 @@ import { logInTrigger, signUpTrigger, persisSignIn } from '../store/routines/rou
 
 
 export function* handleSignUpTrigger(action) {
+  console.log('user', action);
   yield put(signUpTrigger.request());
   try {
     const response = yield call(ApiService.signUp, action);
     const user = response.data;
+    console.log('user2', user);
     yield put(signUpTrigger.success(user));
   } catch (e) {
     yield put(signUpTrigger.failure(e.message));

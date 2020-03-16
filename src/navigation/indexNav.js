@@ -7,13 +7,13 @@ import {
 } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActiveColumn from '../navigation/activeColumnNav'
-import SignUpScreenContainer from './screens/SignUpScreen/SignUpScreenContainer';
-import LogInScreenContainer from './screens/LogInScreen/LogInScreenContainer';
-import DescContainerScreen from './screens/Desc/DescContainerScreen';
-import ColumnAddScreenContainer from './screens/ColumnScreen/ColumnAddScreenContainer';
-import TaskScreenContainer from './screens/TaskScreen/TaskScreenContainer';
-import ColumnSettingScreenContainer from './screens/ColumnScreen/ColumnSettingScreenContainer';
-import AsyncStorageService from './services/ApiAsyncStorage';
+import SignUpScreenContainer from '../screens/SignUpScreen/SignUpScreenContainer';
+import LogInScreenContainer from '../screens/LogInScreen/LogInScreenContainer';
+import DescContainerScreen from '../screens/Desc/DescContainerScreen';
+import ColumnAddScreenContainer from '../screens/ColumnScreen/ColumnAddScreenContainer';
+import TaskScreenContainer from '../screens/TaskScreen/TaskScreenContainer';
+import ColumnSettingScreenContainer from '../screens/ColumnScreen/ColumnSettingScreenContainer';
+import AsyncStorageService from '../services/ApiAsyncStorage';
 
 const Stack = createStackNavigator();
 
@@ -41,7 +41,7 @@ const Navigation = () => {
         options={({ navigation }) => ({
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate('addColumn')} style={{ marginRight: 15 }}>
-              <Image source={require('./images/addColumn.png')} />
+              <Image source={require('../images/addColumn.png')} />
             </TouchableOpacity>
           ),
           headerLeft: () => (
@@ -67,7 +67,7 @@ const Navigation = () => {
               onPress={() => navigation.navigate('Settings', { columnId: route.params.columnId })}
               style={{ marginRight: 15 }}
             >
-              <Image source={require('./images/settings.png')} />
+              <Image source={require('../images/settings.png')} />
             </TouchableOpacity>
           ),
           title: route.params.title,

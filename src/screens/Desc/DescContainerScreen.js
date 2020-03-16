@@ -3,7 +3,7 @@ import React from 'react';
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { connect } from 'react-redux';
 import Desc from './DescScreen';
-import {getColumnsPromiseCreator } from '../../store/routines/routines';
+import { getColumnsPromiseCreator } from '../../store/routines/routines';
 
 class DescContainerScreen extends React.Component {
   state = {

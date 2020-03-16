@@ -3,15 +3,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import SignUpScreen from './SignUpScreen';
-import {signUpTrigger} from '../../store/routines/routines';
+import {signUpTriggerPromiseCreator} from '../../store/routines/routines';
+import { bindPromiseCreators } from 'redux-saga-routines';
 
 class SignUpScreenContainer extends React.Component {
 
   signUpTrigger = async (v) => {
-    console.log('v', v)
-    const {signUpTrigger, navigation} = this.props;
-    await signUpTrigger(v);
-    navigation.navigate('My Desc');
+    const {signUpTriggerPromiseCreator, navigation} = this.props;
+
+    try{
+      await signUpTriggerPromiseCreator(v)
+        .then(() => navigation.navigate('My Desc'))
+    }catch(e) {
+      console.log(e)
+    }
   }
 
   render() {
@@ -20,8 +25,9 @@ class SignUpScreenContainer extends React.Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => bindActionCreators({
-  signUpTrigger,
+
+const mapDispatchToProps = dispatch => bindPromiseCreators({
+  signUpTriggerPromiseCreator,
 }, dispatch)
 
 SignUpScreenContainer.propTypes = {

@@ -13,5 +13,6 @@ export const getComments = createRoutine('GET_COMMENTS');
 export const addComment = createRoutine('ADD_COMMENT');
 export const logInTrigger = createRoutine('LOGIN_TRIGGER');
 export const signUpTrigger = createRoutine('SIGN_UP_TRIGGER');
+export const signUpTriggerPromiseCreator = promisifyRoutine(signUpTrigger);
 export const persisSignIn = createRoutine('PERSIS_SIGN_IN');
 export const persisSignInPromiseCreator = promisifyRoutine(persisSignIn);

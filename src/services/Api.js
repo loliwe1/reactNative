@@ -10,7 +10,7 @@ class Api {
 
     signUp = (data) => {
         const {payload} = data;
-        console.log(payload);
+        console.log('api-p', payload);
         return axios.post(`${this.apiUrl}/auth/sign-up`, payload).then(this.setAuthorizationHeader);
     }
 
@@ -51,7 +51,6 @@ class Api {
     }
 
     persisSignIn = (token) => {
-        console.log('token', token)
         return axios.get(`${this.apiUrl}/columns`, {
             headers: {'Authorization': `bearer ${token}`},
         }).then(response => {

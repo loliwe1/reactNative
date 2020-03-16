@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import ColumnScreenContainer from './screens/ColumnScreen/ColumnScreenContainer';
+import ColumnScreenContainer from '../screens/ColumnScreen/ColumnScreenContainer';
 
 const Tab = createMaterialTopTabNavigator();
 

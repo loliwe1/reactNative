@@ -16,7 +16,6 @@ class ApiStorage {
 
     addComments = async (data) => {
         const comment = data.payload;
-        console.log('comment',comment);
         try {
             let id = JSON.parse(await AsyncStorage.getItem('nextCommentId') || 1);
             comment.id = id; 
